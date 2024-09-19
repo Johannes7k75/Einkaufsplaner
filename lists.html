@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Meine Einkauslisten</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="./index.html"><button class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-left">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button></a>
+        <h1>Meine Einkauslisten</h1>
+    </header>
+
+    <section id="lists">
+        <!-- <a href="./list.html?list=Wocheneinkauf">
+            <div>Wocheneinkauf</div>
+        </a>
+        <a href="./list.html?list=WG-Party">
+            <div>WG-Party</div>
+        </a> -->
+    </section>
+
+    <section id="addNewList" class="grayContainer">
+        <input type="text" name="Neue Liste" placeholder="Vorräte">
+        <button>Liste hinzufügen</button>
+    </section>
+
+    <footer>
+        <button id="loadDefaults">Lade defaults</button>
+    </footer>
+</body>
+
+<style>
+    section {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin: 2rem;
+        margin-bottom: 5rem;
+        gap: 1rem;
+    }
+
+    .dialogItem {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem
+    }
+
+    #newItemDialog>form #saveList {
+        margin-top: 0.5rem;
+        float: right;
+    }
+
+    #addNewList {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        max-width: 350px;
+
+        margin: auto auto 4rem auto;
+        width: calc(100% - 2rem);
+
+        &>* {
+            width: 100%;
+            text-align: center;
+        }
+
+        &>input {
+            max-width: calc(100% - 8px);
+            height: 1.5rem;
+        }
+    }
+
+    /* #addNewItem {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+
+        margin: auto 1rem 4rem 1rem;
+        width: calc(100% - 2rem);
+
+        &>* {
+            width: 100%;
+            text-align: center;
+        }
+
+        &>input {
+            width: calc(100% - 8px);
+        }
+        
+    } */
+</style>
+
+<script src="./main.js"></script>
+
+<script>
+    function refresh() {
+        const listElement = document.querySelector("section#lists")
+        listElement.replaceChildren()
+        console.log(localLists.getAll())
+        for (const item of localLists.getAll()) {
+            const divTag = createElement("div", { innerText: item.name });
+            const aTag = createElement("a", { href: `./list.html?list=${item.name}` }, [divTag])
+            aTag.classList.add("list")
+            listElement.appendChild(aTag)
+        }
+
+        const addNewList = document.querySelector("#addNewList > button")
+        addNewList.addEventListener("click", (e) => {
+            const newListName = e.target.parentElement.querySelector("input").value;
+            localLists.addList(newListName)
+            refresh()
+        })
+
+    }
+</script>
+
+<script>
+    const loadDefaultsButton = document.querySelector("button#loadDefaults")
+    loadDefaultsButton.addEventListener("click", () => {
+        loadDefaultLists()
+        refresh()
+    })
+</script>
+
+<script>
+    window.onload = function () {
+        refresh()
+    }
+</script>
+
+</html>

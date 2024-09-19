@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./main.js"></script>
+    <title>Einkausplaner</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1>
+            Mein Einkausplaner
+        </h1>
+    </header>
+
+    <section>
+        <a class="planerItem" href="./lists.html">
+            <div>Einkauslisten</div>
+        </a>
+        <a class="planerItem" href="">
+            <div>Menüplanung</div>
+        </a>
+    </section>
+</body>
+
+<style>
+    .planerItem {
+        display: flex;
+        border: 1px solid black;
+        border-radius: 1rem;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 4rem;
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin: 2rem;
+        gap: 1rem;
+    }
+</style>
+
+</html>
